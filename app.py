@@ -7,10 +7,14 @@ from langchain_core.documents import Document
 import random
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-os.environ["GOOGLE_API_KEY"] = "AIzaSyDJx7I5gVLTGIuB4FZnzP-A1qrt_YeKVlo"
+api_key = os.getenv("API_KEY")
+os.environ["GOOGLE_API_KEY"] = api_key
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 persist_dir = "memory_store"

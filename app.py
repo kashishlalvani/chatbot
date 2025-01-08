@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, jsonify
 from better_profanity import profanity
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
-from langchain_chroma import Chroma
+from langchain.vectorstores import Chroma
 from langchain_core.documents import Document
 import random
 import requests
@@ -12,9 +12,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-
-api_key = os.getenv("API_KEY")
-os.environ["GOOGLE_API_KEY"] = api_key
+google_api_key = os.getenv("GOOGLE_API_KEY")
+os.environ["GOOGLE_API_KEY"] = google_api_key
 embedding_model = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
 
 persist_dir = "memory_store"
